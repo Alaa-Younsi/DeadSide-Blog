@@ -1,19 +1,17 @@
 import React, { useEffect, useRef } from 'react'
 
-interface Particle {
+interface Star {
   x: number
   y: number
-  vx: number
-  vy: number
-  color: string
-  size: number
-  opacity: number
+  r: number
+  phase: number
+  speed: number
 }
 
-const ParticleBackground: React.FC = () => {
+const StarField: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animFrameRef = useRef<number>(0)
-  const particlesRef = useRef<Particle[]>([])
+  const rafRef    = useRef<number>(0)
+  const starsRef  = useRef<Star[]>([])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -21,76 +19,43 @@ const ParticleBackground: React.FC = () => {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    const colors = ['#00d4ff', '#e94560']
-
-    const resize = () => {
-      canvas.width = window.innerWidth
+    const init = () => {
+      canvas.width  = window.innerWidth
       canvas.height = window.innerHeight
-    }
-
-    const initParticles = () => {
-      particlesRef.current = Array.from({ length: 80 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.3 + 0.3,
+      starsRef.current = Array.from({ length: 180 }, () => ({
+        x:     Math.random() * canvas.width,
+        y:     Math.random() * canvas.height,
+        r:     Math.random() * 1.1 + 0.2,
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.3 + 0.08,
       }))
     }
 
-    const draw = () => {
+    let startTime = 0
+    const draw = (ts: number) => {
+      if (!startTime) startTime = ts
+      const t = (ts - startTime) / 1000
+
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      const particles = particlesRef.current
-
-      particles.forEach((p) => {
-        p.x += p.vx
-        p.y += p.vy
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1
-
+      starsRef.current.forEach((s) => {
+        const twinkle   = 0.25 + 0.75 * Math.abs(Math.sin(t * s.speed + s.phase))
+        ctx.globalAlpha = twinkle * 0.6
+        ctx.fillStyle   = '#ffffff'
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = p.color
-        ctx.globalAlpha = p.opacity
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
         ctx.fill()
       })
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 120) {
-            ctx.beginPath()
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = particles[i].color
-            ctx.globalAlpha = (1 - dist / 120) * 0.2
-            ctx.lineWidth = 0.5
-            ctx.stroke()
-          }
-        }
-      }
-      ctx.globalAlpha = 1
-
-      animFrameRef.current = requestAnimationFrame(draw)
+      ctx.globalAlpha  = 1
+      rafRef.current   = requestAnimationFrame(draw)
     }
 
-    resize()
-    initParticles()
-    draw()
-
-    const handleResize = () => {
-      resize()
-      initParticles()
-    }
-    window.addEventListener('resize', handleResize)
+    init()
+    rafRef.current = requestAnimationFrame(draw)
+    window.addEventListener('resize', init)
 
     return () => {
-      cancelAnimationFrame(animFrameRef.current)
-      window.removeEventListener('resize', handleResize)
+      cancelAnimationFrame(rafRef.current)
+      window.removeEventListener('resize', init)
     }
   }, [])
 
@@ -104,4 +69,4 @@ const ParticleBackground: React.FC = () => {
   )
 }
 
-export default ParticleBackground
+export default StarField

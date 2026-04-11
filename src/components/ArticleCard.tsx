@@ -11,109 +11,92 @@ interface ArticleCardProps {
 const ArticleCard: React.FC<ArticleCardProps> = memo(({ article, index = 0 }) => {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      whileHover={{ scale: 1.005 }}
-      className="rounded-lg overflow-hidden border group cursor-pointer"
+      transition={{ duration: 0.45, delay: index * 0.08 }}
+      className="group border-l-2 overflow-hidden"
       style={{
-        background: 'var(--bg-alt)',
         borderColor: 'var(--border)',
-        borderLeft: '3px solid var(--accent)',
-        transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+        transition: 'border-color 0.3s ease',
       }}
       onMouseEnter={(e) => {
-        const el = e.currentTarget as HTMLElement
-        el.style.borderColor = 'var(--accent)'
-        el.style.boxShadow = '0 0 20px rgba(233,69,96,0.15), -3px 0 8px rgba(233,69,96,0.3)'
-        el.style.background = 'linear-gradient(90deg, rgba(233,69,96,0.05), var(--bg-alt))'
+        (e.currentTarget as HTMLElement).style.borderColor = 'var(--red)'
       }}
       onMouseLeave={(e) => {
-        const el = e.currentTarget as HTMLElement
-        el.style.borderColor = 'var(--border)'
-        el.style.boxShadow = 'none'
-        el.style.background = 'var(--bg-alt)'
+        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'
       }}
     >
       <Link
         to={`/articles/${article.slug}`}
-        className="flex flex-col sm:flex-row gap-0 h-full"
+        className="flex flex-col sm:flex-row gap-0"
         tabIndex={-1}
       >
         {/* Content */}
-        <div className="flex flex-col flex-1 p-5">
-          {/* Category badge */}
-          <div className="flex items-center gap-2 mb-2">
+        <div
+          className="flex flex-col flex-1 px-5 py-4 transition-colors duration-300"
+          style={{ background: 'var(--surface)' }}
+        >
+          {/* Category + meta row */}
+          <div className="flex items-center gap-3 mb-2">
             <span
-              className="font-mono text-xs px-2 py-0.5 rounded"
+              className="font-mono text-xs px-2 py-0.5"
               style={{
-                color: '#a78bfa',
-                background: 'rgba(83,52,131,0.3)',
-                border: '1px solid rgba(83,52,131,0.5)',
+                color:      'var(--muted)',
+                background: 'var(--raised)',
+                border:     '1px solid var(--border)',
               }}
             >
               {article.category}
             </span>
+            <span className="font-mono text-xs" style={{ color: 'var(--muted)' }}>
+              {article.date} · {article.readTime}
+            </span>
           </div>
 
           <h3
-            className="font-display font-bold text-xl mb-1 leading-tight"
-            style={{ color: 'var(--text-bright)' }}
+            className="font-display font-semibold text-lg mb-1.5 leading-snug"
+            style={{ color: 'var(--star-bright)' }}
           >
             {article.title}
           </h3>
-          <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: 'var(--text-dim)' }}>
+          <p className="text-sm leading-relaxed mb-3 flex-1" style={{ color: 'var(--muted)' }}>
             {article.subtitle}
           </p>
 
           {/* Keywords */}
-          <div className="flex flex-wrap gap-1.5 mb-3">
+          <div className="flex flex-wrap gap-1.5 mt-auto">
             {article.keywords.slice(0, 3).map((kw) => (
               <span
                 key={kw}
-                className="font-mono text-xs px-2 py-0.5 rounded"
-                style={{
-                  color: 'var(--text-dim)',
-                  background: 'rgba(31,43,71,0.8)',
-                  border: '1px solid var(--border)',
-                }}
+                className="font-mono text-xs px-1.5 py-0.5"
+                style={{ color: 'var(--muted)', border: '1px solid var(--border)' }}
               >
                 #{kw}
               </span>
             ))}
-          </div>
-
-          <div className="flex items-center justify-between mt-auto">
-            <div className="flex items-center gap-3 font-mono text-xs" style={{ color: 'var(--text-dim)' }}>
-              <span>{article.date}</span>
-              <span>·</span>
-              <span>{article.readTime}</span>
-            </div>
             <span
-              className="font-mono text-xs group-hover:translate-x-1 transition-transform duration-200"
-              style={{ color: 'var(--accent)' }}
+              className="ml-auto font-mono text-xs transition-all duration-200 group-hover:translate-x-1"
+              style={{ color: 'var(--red)' }}
             >
               READ →
             </span>
           </div>
         </div>
 
-        {/* Thumbnail — hidden on mobile */}
-        <div className="hidden sm:block w-40 flex-shrink-0 relative overflow-hidden">
+        {/* Thumbnail */}
+        <div className="hidden sm:block w-36 flex-shrink-0 relative overflow-hidden">
           <img
             src={article.coverImage}
             alt={article.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            style={{ minHeight: '120px' }}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            style={{ minHeight: '110px' }}
             loading="lazy"
-            width={160}
-            height={120}
+            width={144}
+            height={110}
           />
           <div
             className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(90deg, var(--bg-alt) 0%, transparent 40%)',
-            }}
+            style={{ background: 'linear-gradient(90deg, var(--surface) 0%, transparent 35%)' }}
           />
         </div>
       </Link>

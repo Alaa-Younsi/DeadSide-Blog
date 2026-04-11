@@ -1,284 +1,235 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
-import ParticleBackground from '../components/ParticleBackground'
+import BlackholeCanvas from '../components/BlackholeCanvas'
 import GlitchText from '../components/GlitchText'
-import CyberDivider from '../components/CyberDivider'
+import SpaceDivider from '../components/CyberDivider'
 import PostCard from '../components/PostCard'
 import ArticleCard from '../components/ArticleCard'
 import { posts } from '../data/posts'
 import { articles } from '../data/articles'
 
 const Home: React.FC = () => {
-  const glitchRef = useRef<HTMLSpanElement>(null)
-  const [glitching, setGlitching] = useState(true)
-
-  useEffect(() => {
-    const timer = setTimeout(() => setGlitching(false), 2000)
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
     <>
       <Helmet>
         <title>Dead Side | Home</title>
-        <meta name="description" content="Dead Side — A blog from the digital underground. Tech, culture, and the space between." />
-        <meta name="keywords" content="cyberpunk, tech, culture, blog, digital, underground" />
-        <meta property="og:title" content="Dead Side | Home" />
-        <meta property="og:description" content="A blog from the digital underground. Tech. Culture. The space between." />
-        <meta property="og:image" content="https://picsum.photos/seed/cyber001/1200/600" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://deadside.dev/" />
+        <meta name="description" content="Dead Side — Dispatches from the edge of the known universe. Tech, thought, and the void between." />
+        <meta property="og:title"       content="Dead Side | Home" />
+        <meta property="og:description" content="Dispatches from the edge of the known universe." />
+        <meta property="og:type"        content="website" />
+        <meta name="twitter:card"       content="summary_large_image" />
+        <link rel="canonical" href="https://deadside.vercel.app/" />
       </Helmet>
 
-      {/* ─── HERO ─── */}
+      {/* ── HERO ─────────────────────────────────────────── */}
       <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-        <ParticleBackground />
-
-        {/* Background grid */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-            zIndex: 1,
-          }}
-          aria-hidden="true"
-        />
-
-        {/* Hero radial glow */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(233,69,96,0.12) 0%, transparent 65%)',
-            zIndex: 1,
-          }}
-          aria-hidden="true"
-        />
+        {/* Black hole canvas fills the entire hero */}
+        <BlackholeCanvas />
 
         {/* Content */}
-        <div className="relative text-center px-4 z-10 max-w-5xl mx-auto">
+        <div className="relative z-10 text-center px-5 max-w-3xl mx-auto select-none">
           <motion.p
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="font-mono text-xs uppercase tracking-[0.3em] mb-6"
-            style={{ color: 'var(--cyan)' }}
+            transition={{ duration: 0.7 }}
+            className="font-mono text-xs uppercase tracking-[0.4em] mb-8"
+            style={{ color: 'var(--muted)' }}
           >
-            ▸ TRANSMISSION INCOMING
+            ○ &nbsp; Beyond the Event Horizon &nbsp; ○
           </motion.p>
 
           <motion.h1
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display font-black leading-none mb-6 tracking-tight"
+            transition={{ duration: 1, delay: 0.2 }}
+            className="font-display font-bold leading-none mb-6 tracking-tight"
             style={{
-              fontSize: 'clamp(4rem, 12vw, 9rem)',
-              color: '#fff',
-              textShadow:
-                '0 0 10px var(--accent), 0 0 30px var(--accent), 0 0 60px rgba(233,69,96,0.4), 0 0 8px var(--cyan)',
+              fontSize:   'clamp(4rem, 13vw, 10rem)',
+              color:      'var(--white)',
+              textShadow: '0 2px 40px rgba(0,0,0,0.9)',
             }}
           >
-            <span ref={glitchRef}>
-              <GlitchText
-                text="DEAD SIDE"
-                className={glitching ? 'animate-neonFlicker' : ''}
-              />
-            </span>
+            <GlitchText text="DEAD SIDE" />
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-lg md:text-xl mb-10 max-w-xl mx-auto"
-            style={{ color: 'var(--text-dim)' }}
+            transition={{ duration: 0.9, delay: 0.55 }}
+            className="text-base md:text-lg mb-12 leading-relaxed"
+            style={{ color: 'var(--text)' }}
           >
-            A blog from the digital underground. Tech. Culture.
+            Dispatches from the edge of the known universe.
             <br />
-            The space between.
+            Tech. Thought. The void between.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link
               to="/blog"
-              className="px-8 py-3 font-mono text-sm uppercase tracking-widest rounded transition-all duration-300"
+              className="px-8 py-3 font-mono text-xs uppercase tracking-widest transition-all duration-300"
               style={{
-                background: 'var(--accent)',
-                color: '#fff',
-                boxShadow: '0 0 16px rgba(233,69,96,0.4)',
+                background:  'var(--red)',
+                color:       '#fff',
+                boxShadow:   '0 0 20px rgba(204,0,0,0.4)',
               }}
               onMouseEnter={(e) => {
-                const el = e.currentTarget
-                el.style.transform = 'scale(1.05)'
-                el.style.boxShadow = '0 0 30px rgba(233,69,96,0.7)'
+                const el = e.currentTarget as HTMLElement
+                el.style.background  = 'var(--red-glow)'
+                el.style.boxShadow   = '0 0 35px rgba(255,32,32,0.6)'
               }}
               onMouseLeave={(e) => {
-                const el = e.currentTarget
-                el.style.transform = 'scale(1)'
-                el.style.boxShadow = '0 0 16px rgba(233,69,96,0.4)'
+                const el = e.currentTarget as HTMLElement
+                el.style.background  = 'var(--red)'
+                el.style.boxShadow   = '0 0 20px rgba(204,0,0,0.4)'
               }}
             >
-              ENTER THE BLOG
+              Explore Blog
             </Link>
             <Link
               to="/articles"
-              className="px-8 py-3 font-mono text-sm uppercase tracking-widest rounded border transition-all duration-300"
+              className="px-8 py-3 font-mono text-xs uppercase tracking-widest border transition-all duration-300"
               style={{
-                background: 'transparent',
-                color: 'var(--cyan)',
-                borderColor: 'var(--cyan)',
-                boxShadow: '0 0 8px rgba(0,212,255,0.2)',
+                background:  'transparent',
+                color:       'var(--star-bright)',
+                borderColor: 'var(--border-hover)',
               }}
               onMouseEnter={(e) => {
-                const el = e.currentTarget
-                el.style.background = 'rgba(0,212,255,0.1)'
-                el.style.boxShadow = '0 0 20px rgba(0,212,255,0.5)'
+                const el = e.currentTarget as HTMLElement
+                el.style.borderColor = 'var(--muted)'
+                el.style.color       = 'var(--white)'
               }}
               onMouseLeave={(e) => {
-                const el = e.currentTarget
-                el.style.background = 'transparent'
-                el.style.boxShadow = '0 0 8px rgba(0,212,255,0.2)'
+                const el = e.currentTarget as HTMLElement
+                el.style.borderColor = 'var(--border-hover)'
+                el.style.color       = 'var(--star-bright)'
               }}
             >
-              READ ARTICLES
+              Read Articles
             </Link>
           </motion.div>
         </div>
 
-        {/* Scroll arrow */}
+        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+          transition={{ delay: 1.4 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           aria-hidden="true"
         >
-          <span className="font-mono text-xs" style={{ color: 'var(--text-dim)' }}>
-            SCROLL
+          <span className="font-mono text-xs tracking-widest" style={{ color: 'var(--muted)' }}>
+            scroll
           </span>
           <svg
-            width="16"
-            height="24"
-            viewBox="0 0 16 24"
-            fill="none"
-            style={{
-              color: 'var(--cyan)',
-              animation: 'scrollDown 1.4s ease-in-out infinite',
-            }}
+            width="14" height="22" viewBox="0 0 14 22" fill="none"
+            style={{ color: 'var(--red)', animation: 'scrollDown 1.4s ease-in-out infinite' }}
           >
-            <path
-              d="M8 3L8 21M8 21L3 15M8 21L13 15"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+            <path d="M7 2L7 20M7 20L2 14M7 20L12 14"
+              stroke="currentColor" strokeWidth="1.5"
+              strokeLinecap="round" strokeLinejoin="round"
             />
           </svg>
         </motion.div>
       </section>
 
-      {/* ─── STATS BAR ─── */}
-      <section className="relative z-10 py-12 px-4" style={{ background: 'var(--bg)' }}>
+      {/* ── STATS ────────────────────────────────────────── */}
+      <section className="relative z-10 py-16 px-5" style={{ background: 'var(--void)' }}>
         <div className="max-w-4xl mx-auto">
-          <CyberDivider />
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 py-6">
+          <SpaceDivider />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-20 py-6">
             {[
-              { num: '03', label: 'POSTS' },
-              { num: '03', label: 'ARTICLES' },
-              { num: '∞', label: 'THOUGHTS' },
+              { num: `0${posts.length}`,    label: 'Posts'    },
+              { num: `0${articles.length}`, label: 'Articles' },
+              { num: '∞',                   label: 'Questions' },
             ].map(({ num, label }) => (
               <div key={label} className="text-center">
                 <div
-                  className="font-mono text-4xl font-bold"
-                  style={{
-                    color: 'var(--cyan)',
-                    textShadow: '0 0 12px rgba(0,212,255,0.6)',
-                  }}
+                  className="font-display font-bold text-4xl mb-1"
+                  style={{ color: 'var(--white)' }}
                 >
                   {num}
                 </div>
                 <div
-                  className="font-mono text-xs uppercase tracking-widest mt-1"
-                  style={{ color: 'var(--text-dim)' }}
+                  className="font-mono text-xs uppercase tracking-widest"
+                  style={{ color: 'var(--muted)' }}
                 >
                   {label}
                 </div>
               </div>
             ))}
           </div>
-          <CyberDivider />
+          <SpaceDivider />
         </div>
       </section>
 
-      {/* ─── FEATURED POSTS ─── */}
-      <section className="relative z-10 py-16 px-4" style={{ background: 'var(--bg)' }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-10">
-            <h2
-              className="font-display font-bold text-2xl md:text-3xl scan-heading"
-              style={{ color: 'var(--text-bright)' }}
-            >
-              <span style={{ color: 'var(--cyan)' }}>// </span>
-              LATEST TRANSMISSIONS
-              <span className="cursor-blink" aria-hidden="true" />
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post, i) => (
-              <PostCard key={post.id} post={post} index={i} />
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
+      {/* ── FEATURED POSTS ───────────────────────────────── */}
+      <section className="relative z-10 py-16 px-5" style={{ background: 'var(--void)' }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.3em] mb-2" style={{ color: 'var(--red)' }}>
+                — Latest
+              </p>
+              <h2 className="font-display font-bold text-2xl md:text-3xl" style={{ color: 'var(--white)' }}>
+                Blog Posts
+              </h2>
+            </div>
             <Link
               to="/blog"
-              className="font-mono text-sm uppercase tracking-widest transition-colors duration-200"
-              style={{ color: 'var(--cyan)' }}
+              className="font-mono text-xs uppercase tracking-widest transition-colors duration-200"
+              style={{ color: 'var(--muted)' }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--white)' }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)' }}
             >
-              VIEW ALL POSTS →
+              View all →
             </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: 'var(--border)' }}>
+            {posts.map((post, i) => (
+              <div key={post.id} style={{ background: 'var(--void)' }}>
+                <PostCard post={post} index={i} />
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ─── FEATURED ARTICLES ─── */}
-      <section className="relative z-10 py-16 px-4" style={{ background: 'var(--bg-alt)' }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-10">
-            <h2
-              className="font-display font-bold text-2xl md:text-3xl"
-              style={{ color: 'var(--text-bright)' }}
-            >
-              <span style={{ color: 'var(--accent)' }}>// </span>
-              RECENT ARTICLES
-            </h2>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            {articles.map((article, i) => (
-              <ArticleCard key={article.id} article={article} index={i} />
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
+      {/* ── FEATURED ARTICLES ────────────────────────────── */}
+      <section className="relative z-10 py-16 px-5" style={{ background: 'var(--void)' }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.3em] mb-2" style={{ color: 'var(--red)' }}>
+                — Recent
+              </p>
+              <h2 className="font-display font-bold text-2xl md:text-3xl" style={{ color: 'var(--white)' }}>
+                Articles
+              </h2>
+            </div>
             <Link
               to="/articles"
-              className="font-mono text-sm uppercase tracking-widest transition-colors duration-200"
-              style={{ color: 'var(--accent)' }}
+              className="font-mono text-xs uppercase tracking-widest transition-colors duration-200"
+              style={{ color: 'var(--muted)' }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--white)' }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)' }}
             >
-              VIEW ALL ARTICLES →
+              View all →
             </Link>
+          </div>
+          <div className="flex flex-col gap-px" style={{ background: 'var(--border)' }}>
+            {articles.map((article, i) => (
+              <div key={article.id} style={{ background: 'var(--void)' }}>
+                <ArticleCard article={article} index={i} />
+              </div>
+            ))}
           </div>
         </div>
       </section>

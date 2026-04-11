@@ -7,93 +7,86 @@ import { articles } from '../data/articles'
 const categories = ['All', ...Array.from(new Set(articles.map((a) => a.category)))]
 
 const Articles: React.FC = () => {
-  const [search, setSearch] = useState('')
+  const [search,         setSearch]         = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
 
-  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value)
-  }, [])
+  const handleSearch   = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value), [])
+  const handleCategory = useCallback((cat: string) => setActiveCategory(cat), [])
 
-  const handleCategory = useCallback((cat: string) => {
-    setActiveCategory(cat)
-  }, [])
-
-  const filtered = useMemo(() => {
-    return articles.filter((article) => {
-      const matchesSearch =
-        search.trim() === '' ||
+  const filtered = useMemo(() =>
+    articles.filter((article) => {
+      const matchSearch   = !search.trim() ||
         article.title.toLowerCase().includes(search.toLowerCase()) ||
         article.subtitle.toLowerCase().includes(search.toLowerCase())
-      const matchesCategory = activeCategory === 'All' || article.category === activeCategory
-      return matchesSearch && matchesCategory
-    })
-  }, [search, activeCategory])
+      const matchCategory = activeCategory === 'All' || article.category === activeCategory
+      return matchSearch && matchCategory
+    }), [search, activeCategory])
 
   return (
     <>
       <Helmet>
         <title>Dead Side | Articles</title>
-        <meta name="description" content="Deep dives into engineering, philosophy, and open source culture from Dead Side." />
-        <meta name="keywords" content="articles, engineering, philosophy, open source, tech" />
-        <meta property="og:title" content="Dead Side | Deep Dives" />
-        <meta property="og:description" content="Long-form articles on engineering, philosophy, and culture." />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://deadside.dev/articles" />
+        <meta name="description"        content="Long-form articles on engineering, systems, and the cosmos from Dead Side." />
+        <meta property="og:title"       content="Dead Side | Articles" />
+        <meta property="og:description" content="Long-form articles on engineering and the cosmos." />
+        <meta property="og:type"        content="website" />
+        <link rel="canonical" href="https://deadside.vercel.app/articles" />
       </Helmet>
 
-      <div className="pt-20 min-h-screen" style={{ background: 'var(--bg)' }}>
+      <div className="pt-20 min-h-screen" style={{ background: 'var(--void)' }}>
+
         {/* Header */}
-        <section className="py-16 px-4 border-b" style={{ borderColor: 'var(--border)' }}>
-          <div className="max-w-7xl mx-auto">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="font-display font-black text-4xl md:text-5xl mb-3"
-              style={{ color: 'var(--text-bright)' }}
+        <section className="py-16 px-5 border-b" style={{ borderColor: 'var(--border)' }}>
+          <div className="max-w-6xl mx-auto">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="font-mono text-xs uppercase tracking-[0.3em] mb-3"
+              style={{ color: 'var(--red)' }}
             >
-              <span style={{ color: 'var(--accent)' }}>// </span>DEEP DIVES
+              — Long-form
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="font-display font-bold text-4xl md:text-5xl mb-2"
+              style={{ color: 'var(--white)' }}
+            >
+              Articles
             </motion.h1>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="font-mono text-sm"
-              style={{ color: 'var(--text-dim)' }}
+              transition={{ delay: 0.15 }}
+              className="font-mono text-xs"
+              style={{ color: 'var(--muted)' }}
             >
-              {articles.length} long-form pieces in the archive
+              {articles.length} {articles.length === 1 ? 'piece' : 'pieces'} in the archive
             </motion.p>
           </div>
         </section>
 
         {/* Filters */}
-        <section className="py-6 px-4 border-b" style={{ borderColor: 'var(--border)', background: 'var(--bg-alt)' }}>
-          <div className="max-w-7xl mx-auto space-y-4">
-            {/* Search */}
+        <section className="py-7 px-5 border-b" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
+          <div className="max-w-6xl mx-auto space-y-4">
             <input
               type="search"
               value={search}
               onChange={handleSearch}
-              placeholder="SEARCH ARTICLES..."
-              className="w-full max-w-lg px-4 py-2 rounded border font-mono text-sm outline-none transition-all duration-200"
+              placeholder="Search articles..."
+              className="w-full max-w-md px-4 py-2 font-mono text-xs outline-none transition-all duration-200"
               style={{
-                background: 'var(--bg)',
-                color: 'var(--text-bright)',
-                borderColor: 'var(--border)',
+                background:   'var(--raised)',
+                color:        'var(--star-bright)',
+                border:       '1px solid var(--border)',
               }}
-              onFocus={(e) => {
-                e.currentTarget.style.borderColor = 'var(--accent)'
-                e.currentTarget.style.boxShadow = '0 0 0 1px var(--accent), 0 0 16px rgba(233,69,96,0.2)'
-              }}
-              onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border)'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
+              onFocus={(e)  => { e.currentTarget.style.borderColor = 'var(--red-dim)' }}
+              onBlur={(e)   => { e.currentTarget.style.borderColor = 'var(--border)'  }}
               aria-label="Search articles"
             />
 
             {/* Category tabs */}
-            <div className="flex gap-0" role="tablist">
+            <div className="flex gap-0 border-b" style={{ borderColor: 'var(--border)' }} role="tablist">
               {categories.map((cat) => {
                 const isActive = activeCategory === cat
                 return (
@@ -102,14 +95,14 @@ const Articles: React.FC = () => {
                     role="tab"
                     aria-selected={isActive}
                     onClick={() => handleCategory(cat)}
-                    className="font-mono text-xs px-4 py-2 border-b-2 transition-all duration-200 relative"
+                    className="font-mono text-xs px-4 py-2 border-b-2 -mb-px transition-all duration-200"
                     style={{
-                      color: isActive ? 'var(--accent)' : 'var(--text-dim)',
-                      borderColor: isActive ? 'var(--accent)' : 'transparent',
-                      background: 'transparent',
+                      color:       isActive ? 'var(--white)'  : 'var(--muted)',
+                      borderColor: isActive ? 'var(--red)'    : 'transparent',
+                      background:  'transparent',
                     }}
                   >
-                    {cat.toUpperCase()}
+                    {cat}
                   </button>
                 )
               })}
@@ -118,12 +111,14 @@ const Articles: React.FC = () => {
         </section>
 
         {/* List */}
-        <section className="py-12 px-4">
-          <div className="max-w-7xl mx-auto">
+        <section className="py-12 px-5">
+          <div className="max-w-6xl mx-auto">
             {filtered.length > 0 ? (
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-px" style={{ background: 'var(--border)' }}>
                 {filtered.map((article, i) => (
-                  <ArticleCard key={article.id} article={article} index={i} />
+                  <div key={article.id} style={{ background: 'var(--void)' }}>
+                    <ArticleCard article={article} index={i} />
+                  </div>
                 ))}
               </div>
             ) : (
@@ -132,21 +127,18 @@ const Articles: React.FC = () => {
                 animate={{ opacity: 1 }}
                 className="text-center py-24"
               >
-                <div
-                  className="font-display font-black text-5xl mb-4"
-                  style={{ color: 'var(--text-dim)', animation: 'glitch 0.4s steps(2) infinite' }}
-                >
-                  NO DATA FOUND
+                <div className="font-display font-bold text-4xl mb-4" style={{ color: 'var(--border-hover)' }}>
+                  Nothing found
                 </div>
-                <p className="font-mono text-sm" style={{ color: 'var(--text-dim)' }}>
-                  The archive returned empty. Adjust your query.
+                <p className="font-mono text-xs mb-6" style={{ color: 'var(--muted)' }}>
+                  No articles match your current filters.
                 </p>
                 <button
-                  className="mt-6 font-mono text-sm px-6 py-2 rounded border transition-all duration-200"
-                  style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}
+                  className="font-mono text-xs px-6 py-2 border transition-all duration-200"
+                  style={{ color: 'var(--star-bright)', borderColor: 'var(--border-hover)' }}
                   onClick={() => { setSearch(''); setActiveCategory('All') }}
                 >
-                  RESET
+                  Reset filters
                 </button>
               </motion.div>
             )}
