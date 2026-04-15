@@ -11,35 +11,33 @@ interface ArticleCardProps {
 const ArticleCard: React.FC<ArticleCardProps> = memo(({ article, index = 0 }) => {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="group border-l-2 overflow-hidden"
+      initial={{ opacity: 0, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.06, ease: 'easeOut' }}
+      className="group relative overflow-hidden"
       style={{
-        borderColor: 'var(--border)',
+        borderLeft: '2px solid var(--border)',
         transition: 'border-color 0.3s ease',
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = 'var(--red)'
+        const el = e.currentTarget as HTMLElement
+        el.style.borderColor = 'var(--red)'
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'
+        const el = e.currentTarget as HTMLElement
+        el.style.borderColor = 'var(--border)'
       }}
     >
-      <Link
-        to={`/articles/${article.slug}`}
-        className="flex flex-col sm:flex-row gap-0"
-        tabIndex={-1}
-      >
+      <Link to={`/articles/${article.slug}`} className="flex flex-col sm:flex-row" tabIndex={-1}>
         {/* Content */}
         <div
-          className="flex flex-col flex-1 px-5 py-4 transition-colors duration-300"
+          className="flex flex-col flex-1 px-5 py-5 transition-colors duration-300"
           style={{ background: 'var(--surface)' }}
         >
-          {/* Category + meta row */}
-          <div className="flex items-center gap-3 mb-2">
+          {/* Meta row */}
+          <div className="flex items-center gap-3 mb-2.5">
             <span
-              className="font-mono text-xs px-2 py-0.5"
+              className="font-mono text-[10px] px-2 py-0.5 uppercase tracking-wider"
               style={{
                 color:      'var(--muted)',
                 background: 'var(--raised)',
@@ -49,13 +47,13 @@ const ArticleCard: React.FC<ArticleCardProps> = memo(({ article, index = 0 }) =>
               {article.category}
             </span>
             <span className="font-mono text-xs" style={{ color: 'var(--muted)' }}>
-              {article.date} · {article.readTime}
+              {article.date}&ensp;·&ensp;{article.readTime}
             </span>
           </div>
 
           <h3
-            className="font-display font-semibold text-lg mb-1.5 leading-snug"
-            style={{ color: 'var(--star-bright)' }}
+            className="font-display font-semibold text-base md:text-lg mb-1.5 leading-snug transition-colors duration-200 group-hover:text-white"
+            style={{ color: 'var(--text-bright)' }}
           >
             {article.title}
           </h3>
@@ -63,20 +61,24 @@ const ArticleCard: React.FC<ArticleCardProps> = memo(({ article, index = 0 }) =>
             {article.subtitle}
           </p>
 
-          {/* Keywords */}
-          <div className="flex flex-wrap gap-1.5 mt-auto">
+          {/* Keywords + read link */}
+          <div className="flex flex-wrap items-center gap-1.5 mt-auto">
             {article.keywords.slice(0, 3).map((kw) => (
               <span
                 key={kw}
-                className="font-mono text-xs px-1.5 py-0.5"
-                style={{ color: 'var(--muted)', border: '1px solid var(--border)' }}
+                className="font-mono text-[10px] px-1.5 py-0.5 transition-colors duration-200"
+                style={{
+                  color:  'var(--muted)',
+                  border: '1px solid var(--border)',
+                }}
               >
                 #{kw}
               </span>
             ))}
             <span
-              className="ml-auto font-mono text-xs transition-all duration-200 group-hover:translate-x-1"
+              className="ml-auto font-mono text-xs tracking-wider transition-all duration-300 group-hover:translate-x-1"
               style={{ color: 'var(--red)' }}
+              aria-label="Read more"
             >
               READ →
             </span>
@@ -89,14 +91,15 @@ const ArticleCard: React.FC<ArticleCardProps> = memo(({ article, index = 0 }) =>
             src={article.coverImage}
             alt={article.title}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            style={{ minHeight: '110px' }}
+            style={{ minHeight: '116px' }}
             loading="lazy"
             width={144}
-            height={110}
+            height={116}
+            decoding="async"
           />
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(90deg, var(--surface) 0%, transparent 35%)' }}
+            style={{ background: 'linear-gradient(90deg, var(--surface) 0%, transparent 40%)' }}
           />
         </div>
       </Link>

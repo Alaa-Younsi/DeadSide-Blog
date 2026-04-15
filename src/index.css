@@ -14,6 +14,7 @@
   --muted:        #444444;
   --text:         #888888;
   --text-bright:  #cccccc;
+  --star-bright:  #cccccc; /* alias for Tailwind star-bright token */
   --white:        #f2f2f2;
   --red:          #cc0000;
   --red-glow:     #ff2020;
@@ -75,14 +76,34 @@ body {
 
 @keyframes scrollDown {
   0%   { transform: translateY(0);    opacity: 1; }
-  75%  { transform: translateY(8px);  opacity: 0; }
-  76%  { transform: translateY(-8px); opacity: 0; }
+  60%  { transform: translateY(10px); opacity: 0; }
+  61%  { transform: translateY(-4px); opacity: 0; }
   100% { transform: translateY(0);    opacity: 1; }
 }
 
 @keyframes horizonPulse {
   0%, 100% { box-shadow: 0 0 20px rgba(204,0,0,0.35), 0 0 50px rgba(204,0,0,0.15); }
   50%       { box-shadow: 0 0 35px rgba(204,0,0,0.55), 0 0 80px rgba(204,0,0,0.25); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%)  skewX(-15deg); }
+}
+
+@keyframes orbitCW {
+  from { transform: rotate(0deg)   translateX(12px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(12px) rotate(-360deg); }
+}
+
+@keyframes redPulse {
+  0%, 100% { opacity: 0.5; box-shadow: 0 0 6px var(--red); }
+  50%       { opacity: 1;   box-shadow: 0 0 14px var(--red), 0 0 28px rgba(204,0,0,0.4); }
 }
 
 /* ─── Utility classes ─── */
@@ -118,6 +139,35 @@ body {
 
 /* Red event horizon glow */
 .event-horizon { animation: horizonPulse 4s ease-in-out infinite; }
+
+/* Shimmer — overlay a moving highlight, apply relative + overflow-hidden to parent */
+.shimmer-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.04) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2.4s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.group:hover .shimmer-overlay { opacity: 1; }
+
+/* Red top accent bar — apply to card wrappers */
+.card-accent-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), var(--red-dim));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.group:hover .card-accent-bar { transform: scaleX(1); }
 
 /* Code blocks */
 pre { overflow-x: auto; }

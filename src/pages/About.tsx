@@ -12,7 +12,7 @@ const skills = [
 
 const terminalLines = [
   { delay: 0,    text: '$ whoami',                          color: 'var(--muted)' },
-  { delay: 300,  text: '> ghost_node_47',                   color: 'var(--white)' },
+  { delay: 300,  text: '> ashv3il',                   color: 'var(--white)' },
   { delay: 700,  text: '$ cat /etc/identity',               color: 'var(--muted)' },
   { delay: 1100, text: '> Location: Somewhere in the void', color: 'var(--text)' },
   { delay: 1400, text: '> Status: Online (mostly)',         color: 'var(--text)' },
@@ -39,7 +39,7 @@ const About: React.FC = () => {
       <Helmet>
         <title>Dead Side | About</title>
         <meta name="description"        content="About the author of Dead Side — a developer and writer operating somewhere in the void." />
-        <meta name="keywords"           content="about, developer, writer, ghost_node_47" />
+        <meta name="keywords"           content="about, developer, writer, ashv3il" />
         <meta property="og:title"       content="Dead Side | About" />
         <meta property="og:description" content="A developer and writer. Somewhere in the void." />
         <meta property="og:type"        content="profile" />
@@ -82,7 +82,7 @@ const About: React.FC = () => {
               className="font-display font-bold leading-none mb-5"
               style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)', color: 'var(--white)' }}
             >
-              <GlitchText text="GHOST_NODE_47" />
+              <GlitchText text="ashv3il" />
             </motion.h1>
             <motion.p
               initial={{ opacity: 0 }}
@@ -118,7 +118,7 @@ const About: React.FC = () => {
                 <p>
                   I operate under the handle{' '}
                   <span style={{ color: 'var(--star-bright)' }} className="font-mono">
-                    ghost_node_47
+                    ashv3il
                   </span>
                   . I don't have a physical address, exactly — I have a series of connections, a
                   network of servers, a collection of half-finished projects that probably run

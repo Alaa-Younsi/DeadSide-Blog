@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary Meta -->
-    <title>Dead Side — A Blog from the Digital Underground</title>
-    <meta name="description" content="Dead Side — A blog from the digital underground. Tech deep-dives, cultural commentary, and the space between. Built for those who think differently." />
-    <meta name="keywords" content="blog, tech, cyberpunk, programming, culture, digital, articles" />
-    <meta name="author" content="Dead Side" />
-    <meta name="robots" content="index, follow" />
+    <title>Dead Side — Dispatches from the Edge of the Known Universe</title>
+    <meta name="description" content="Dead Side — A personal blog about tech, engineering, systems thinking, and the void between. Outer space aesthetic. Dark philosophy. Real signal." />
+    <meta name="keywords" content="blog, tech, engineering, systems, programming, space, cybersecurity, articles, dead side" />
+    <meta name="author" content="ghost_node_47" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="theme-color" content="#000000" />
     <link rel="canonical" href="https://deadside.vercel.app/" />
 
@@ -17,30 +17,60 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://deadside.vercel.app/" />
-    <meta property="og:title" content="Dead Side — A Blog from the Digital Underground" />
-    <meta property="og:description" content="Tech deep-dives, cultural commentary, and the space between. Built for those who think differently." />
-    <meta property="og:image" content="https://deadside.vercel.app/og-image.png" />
-    <meta property="og:image:width" content="1200" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="https://deadside.vercel.app/" />
+    <meta property="og:title"       content="Dead Side — Dispatches from the Edge of the Known Universe" />
+    <meta property="og:description" content="Tech deep-dives, engineering philosophy, and the space between. A signal from the void." />
+    <meta property="og:image"       content="https://deadside.vercel.app/og-image.png" />
+    <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Dead Side" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:image:alt"    content="Dead Side — Beyond the Event Horizon" />
+    <meta property="og:site_name"    content="Dead Side" />
+    <meta property="og:locale"       content="en_US" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://deadside.vercel.app/" />
-    <meta name="twitter:title" content="Dead Side — A Blog from the Digital Underground" />
-    <meta name="twitter:description" content="Tech deep-dives, cultural commentary, and the space between. Built for those who think differently." />
-    <meta name="twitter:image" content="https://deadside.vercel.app/og-image.png" />
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:url"         content="https://deadside.vercel.app/" />
+    <meta name="twitter:title"       content="Dead Side — Dispatches from the Edge" />
+    <meta name="twitter:description" content="Tech deep-dives, engineering philosophy, and the space between." />
+    <meta name="twitter:image"       content="https://deadside.vercel.app/og-image.png" />
 
-    <!-- Google Fonts: Space Grotesk + Space Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- DNS Prefetch & Preconnect for Google Fonts -->
+    <link rel="dns-prefetch"  href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch"  href="https://fonts.gstatic.com" />
+    <link rel="preconnect"    href="https://fonts.googleapis.com" />
+    <link rel="preconnect"    href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts: Space Grotesk + Space Mono (display=swap for perf) -->
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Dead Side",
+      "description": "A personal blog about tech, engineering, systems thinking, and the cosmos.",
+      "url": "https://deadside.vercel.app/",
+      "author": {
+        "@type": "Person",
+        "name": "ghost_node_47",
+        "url": "https://deadside.vercel.app/about"
+      },
+      "inLanguage": "en-US",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://deadside.vercel.app/blog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
