@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --color-background: #f4f1ea;
+  --color-background-raised: #ebe7db;
+  --color-ink: #1a1a18;
+  --color-ink-muted: #55524a;
+  --color-rule: #c9c2b4;
+  --color-press-red: #b8302a;
+  --color-ink-blue: #2c4b6b;
+  --grain-opacity: 0.05;
+}
+
+[data-theme="dark"] {
+  --color-background: #161512;
+  --color-background-raised: #1e1c17;
+  --color-ink: #ede8dd;
+  --color-ink-muted: #a8a396;
+  --color-rule: #3a372f;
+  --color-press-red: #d65b54;
+  --color-ink-blue: #5c84ad;
+  --grain-opacity: 0.08;
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+  --color-background-raised: var(--color-background-raised);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-rule: var(--color-rule);
+  --color-press-red: var(--color-press-red);
+  --color-ink-blue: var(--color-ink-blue);
+
+  --font-headline: var(--font-headline);
+  --font-body: var(--font-body);
+  --font-meta: var(--font-meta);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-rule);
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    transition:
+      background-color 300ms ease,
+      color 300ms ease;
+  }
+
+  ::selection {
+    background-color: var(--color-press-red);
+    color: var(--color-background);
+  }
+}
+
+@layer utilities {
+  .font-headline {
+    font-family: var(--font-headline);
+  }
+
+  .font-meta {
+    font-family: var(--font-meta);
+  }
+
+  .masthead-rule {
+    border-top: 4px double var(--color-ink);
+    border-bottom: 1px solid var(--color-ink);
+  }
+
+  .grain-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: var(--grain-opacity);
+  }
+
+  .article-body > p:first-of-type::first-letter {
+    float: left;
+    font-family: var(--font-headline);
+    font-size: 4.4rem;
+    line-height: 0.82;
+    padding-right: 0.1em;
+    padding-top: 0.05em;
+    font-weight: 700;
+    color: var(--color-press-red);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .grain-overlay {
+    display: none;
+  }
+}

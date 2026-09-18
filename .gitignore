@@ -2,63 +2,44 @@
 #  Dependencies
 # ─────────────────────────────────────────────
 node_modules/
-.pnp
-.pnp.js
-.yarn/install-state.gz
 
 # ─────────────────────────────────────────────
-#  Build output
+#  Next.js build output
 # ─────────────────────────────────────────────
-dist/
-dist-ssr/
-build/
+.next/
 out/
+build/
+next-env.d.ts
+
+# ─────────────────────────────────────────────
+#  Velite generated content layer
+# ─────────────────────────────────────────────
+.velite/
 
 # ─────────────────────────────────────────────
 #  Environment variables  (NEVER commit these)
 # ─────────────────────────────────────────────
 .env
 .env.local
-.env.development
 .env.development.local
-.env.test
 .env.test.local
-.env.production
 .env.production.local
-.env.staging
 
 # ─────────────────────────────────────────────
-#  Vite / TypeScript cache
+#  TypeScript
 # ─────────────────────────────────────────────
 *.tsbuildinfo
-.vite/
 
 # ─────────────────────────────────────────────
 #  Testing
 # ─────────────────────────────────────────────
 coverage/
-.nyc_output/
-playwright-report/
-test-results/
 
 # ─────────────────────────────────────────────
 #  Logs
 # ─────────────────────────────────────────────
 logs/
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# ─────────────────────────────────────────────
-#  Package managers
-# ─────────────────────────────────────────────
-.pnpm-store/
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
 
 # ─────────────────────────────────────────────
 #  Editors & IDEs
@@ -73,18 +54,11 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
-*.sublime-project
-*.sublime-workspace
 
 # ─────────────────────────────────────────────
 #  OS-generated files
 # ─────────────────────────────────────────────
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 desktop.ini
 
@@ -97,7 +71,4 @@ desktop.ini
 #  Miscellaneous
 # ─────────────────────────────────────────────
 *.local
-*.orig
 .cache/
-tmp/
-temp/

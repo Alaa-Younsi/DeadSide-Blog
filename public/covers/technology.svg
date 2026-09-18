@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img">
+  <title>Technology desk illustration</title>
+  <defs>
+    <pattern id="tech-dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2.4" fill="#1a1a18" opacity="0.15" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="#dbe3ea" />
+  <rect width="1200" height="800" fill="url(#tech-dots)" />
+  <g stroke="#2c4b6b" stroke-width="10" fill="none" stroke-linecap="square">
+    <path d="M120 620 V300 H360 V180" />
+    <path d="M360 180 H700 V420 H940" />
+    <path d="M700 420 V620 H500" />
+    <path d="M940 420 V220 H1080" />
+    <path d="M500 620 V720" />
+    <path d="M120 300 H260" />
+  </g>
+  <g fill="#b8302a">
+    <circle cx="120" cy="620" r="22" />
+    <circle cx="360" cy="180" r="22" />
+    <circle cx="700" cy="420" r="22" />
+    <circle cx="940" cy="220" r="22" />
+  </g>
+  <g fill="#1a1a18">
+    <circle cx="360" cy="300" r="15" />
+    <circle cx="700" cy="620" r="15" />
+    <circle cx="940" cy="420" r="15" />
+    <circle cx="500" cy="620" r="15" />
+    <circle cx="500" cy="720" r="15" />
+    <circle cx="260" cy="300" r="15" />
+  </g>
+  <rect x="620" y="340" width="160" height="160" fill="#f4f1ea" stroke="#1a1a18" stroke-width="10" />
+</svg>

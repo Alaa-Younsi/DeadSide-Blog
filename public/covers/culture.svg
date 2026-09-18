@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img">
+  <title>Culture desk illustration</title>
+  <defs>
+    <pattern id="culture-dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2.4" fill="#1a1a18" opacity="0.15" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="#f0d9d7" />
+  <rect width="1200" height="800" fill="url(#culture-dots)" />
+  <g fill="none" stroke="#b8302a" stroke-width="10" stroke-linecap="round">
+    <path d="M150 220 C 350 110, 850 110, 1050 220" />
+    <path d="M150 290 C 350 190, 850 190, 1050 290" />
+    <path d="M150 360 C 350 270, 850 270, 1050 360" />
+  </g>
+  <g fill="none" stroke="#1a1a18" stroke-width="10">
+    <circle cx="600" cy="540" r="150" />
+    <path d="M450 540 A 150 150 0 0 1 750 540" />
+  </g>
+  <path d="M600 390 V 240" stroke="#1a1a18" stroke-width="10" fill="none" />
+  <circle cx="600" cy="230" r="22" fill="#b8302a" />
+  <g fill="#1a1a18">
+    <circle cx="460" cy="580" r="14" />
+    <circle cx="740" cy="580" r="14" />
+    <circle cx="600" cy="660" r="14" />
+  </g>
+</svg>

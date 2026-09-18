@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img">
+  <title>Experiments desk illustration</title>
+  <defs>
+    <pattern id="lab-dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2.4" fill="#1a1a18" opacity="0.15" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="#f0d9d7" />
+  <rect width="1200" height="800" fill="url(#lab-dots)" />
+  <g stroke="#2c4b6b" stroke-width="2" fill="none" opacity="0.8">
+    <circle cx="600" cy="480" r="220" stroke-dasharray="6 14" />
+    <circle cx="600" cy="480" r="300" stroke-dasharray="3 16" />
+  </g>
+  <g fill="none" stroke="#1a1a18" stroke-width="10" stroke-linejoin="round">
+    <path d="M555 200 V 360 L 450 570 A 26 26 0 0 0 474 606 H 726 A 26 26 0 0 0 750 570 L 645 360 V 200" />
+    <line x1="530" y1="200" x2="650" y2="200" />
+    <line x1="490" y1="470" x2="710" y2="470" />
+  </g>
+  <g fill="#b8302a">
+    <circle cx="555" cy="540" r="16" />
+    <circle cx="615" cy="560" r="11" />
+    <circle cx="655" cy="520" r="13" />
+  </g>
+  <circle cx="900" cy="260" r="20" fill="#2c4b6b" />
+  <circle cx="260" cy="620" r="18" fill="#2c4b6b" />
+</svg>

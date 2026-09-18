@@ -1,0 +1,31 @@
+---
+title: "Building a Newspaper With No Backend"
+slug: building-a-newspaper-with-no-backend
+category: experiments
+date: "2026-09-19"
+excerpt: "This site is a front page, four desks, and a pile of MDX files — no database, no CMS, and a publish flow that's just a git push."
+cover: "/covers/experiments.svg"
+tags: ["nextjs", "mdx", "architecture"]
+author: "Alaa Younsi"
+featured: true
+featuredOrder: 4
+---
+
+This edition of the paper runs on nothing but static files. There's no database behind it, no admin panel, no login screen — writing a new story means adding a Markdown file to a folder and pushing it to a repository. That sounds almost too plain for something meant to look and move like a real newspaper, but the two goals turned out to line up cleanly: a paper's content doesn't change after it's printed, and a statically generated site doesn't change after it's built.
+
+Every article is an `.mdx` file with a small amount of frontmatter at the top:
+
+```yaml
+title: "Building a Newspaper With No Backend"
+category: experiments
+date: "2026-09-19"
+featured: true
+```
+
+That frontmatter is validated at build time against a schema, not guessed at runtime — a typo in a category name fails the build instead of quietly rendering a broken page in production. The category desks, the front-page lead story, and the "also in this edition" briefs are all derived from that same typed data, which means adding a new section of the paper is a one-line change to a config file, not a new set of hand-wired pages.
+
+<PullQuote>
+  The constraint wasn't "no backend" for its own sake. It was: nothing should be able to go down except the CDN.
+</PullQuote>
+
+The tradeoff is honest: there's no way to publish from a phone, no live editing, no comments stored anywhere. In exchange, the entire site is just HTML, CSS, and a handful of prebuilt routes — fast by default, with nothing to patch, nothing to back up, and nothing that can be down except the network in front of it. For a paper that exists to be read, that trade was worth making.
