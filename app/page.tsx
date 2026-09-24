@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArticleCard } from "@/components/article-card"
 import { ArticleGrid } from "@/components/article-grid"
+import { Fold } from "@/components/fold"
 import { categories } from "@/lib/categories"
 import { getFrontPage, getPostsByCategory } from "@/lib/content"
 
@@ -10,7 +11,7 @@ export default function HomePage() {
   return (
     <div className="space-y-16">
       {lead ? (
-        <section className="grid items-start gap-10 border-b border-rule pb-12 lg:grid-cols-3">
+        <section className="grid items-start gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <ArticleCard post={lead} variant="lead" animateHeadline />
           </div>
@@ -27,6 +28,8 @@ export default function HomePage() {
           No dispatches yet — the first edition is still on the press.
         </p>
       )}
+
+      {lead ? <Fold /> : null}
 
       {briefs.length > 0 ? (
         <section>
@@ -47,7 +50,7 @@ export default function HomePage() {
           if (posts.length === 0) return null
 
           return (
-            <div key={category.slug} className="border-t-2 border-ink pt-4">
+            <div key={category.slug} className="rule-draw relative pt-4">
               <div className="flex items-baseline justify-between">
                 <h2 className="font-headline text-2xl font-black">{category.desk}</h2>
                 <Link

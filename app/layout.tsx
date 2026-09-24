@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
+import { FogCanvas } from "@/components/fog-canvas"
 import { Footer } from "@/components/footer"
 import { GrainOverlay } from "@/components/grain-overlay"
 import { Masthead } from "@/components/masthead"
 import { MotionProvider } from "@/components/motion-provider"
 import { PageTransition } from "@/components/page-transition"
+import { PressIntro } from "@/components/press-intro"
 import { ThemeScript } from "@/components/theme-script"
 import { bodyFont, headlineFont, meta } from "@/lib/fonts"
 import { site } from "@/lib/site"
@@ -46,6 +48,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <MotionProvider>
+          <PressIntro />
+          <FogCanvas />
           <GrainOverlay />
           <Masthead />
           <PageTransition>

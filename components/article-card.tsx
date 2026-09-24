@@ -48,7 +48,7 @@ export function ArticleCard({
         <Link
           href={href}
           className={cn(
-            "relative block overflow-hidden border border-ink bg-background-raised",
+            "halftone relative block overflow-hidden border border-ink bg-background-raised",
             isLead ? "aspect-16/9" : "aspect-3/2",
           )}
         >
@@ -57,7 +57,7 @@ export function ArticleCard({
             alt=""
             fill
             sizes={isLead ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            className="parallax-img object-cover"
           />
         </Link>
       ) : null}

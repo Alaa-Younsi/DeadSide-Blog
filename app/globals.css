@@ -98,6 +98,417 @@
   }
 }
 
+/* ───────────────────────── Press-run intro ───────────────────────── */
+
+.press-intro {
+  display: none;
+}
+
+html[data-intro="running"] {
+  overflow: hidden;
+}
+
+html[data-intro="running"] .press-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--color-background);
+  animation: press-lift 0.65s cubic-bezier(0.7, 0, 0.25, 1) 1.2s forwards;
+}
+
+.press-intro-sheet {
+  padding: 2rem;
+  text-align: center;
+}
+
+.press-intro-kicker {
+  color: var(--color-ink-muted);
+  opacity: 0;
+  animation: fade-up 0.4s ease-out 0.05s forwards;
+}
+
+.press-intro-plate {
+  margin-top: 0.75rem;
+  white-space: nowrap;
+  filter: url(#letterpress);
+}
+
+.press-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-0.3em) scale(1.35);
+  animation: press-stamp 0.38s cubic-bezier(0.2, 0.9, 0.3, 1.25) forwards;
+}
+
+.press-letter:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.press-letter:nth-child(2) {
+  animation-delay: 0.24s;
+}
+.press-letter:nth-child(3) {
+  animation-delay: 0.28s;
+}
+.press-letter:nth-child(4) {
+  animation-delay: 0.32s;
+}
+.press-letter:nth-child(5) {
+  animation-delay: 0.36s;
+}
+.press-letter:nth-child(6) {
+  animation-delay: 0.4s;
+}
+.press-letter:nth-child(7) {
+  animation-delay: 0.44s;
+}
+.press-letter:nth-child(8) {
+  animation-delay: 0.48s;
+}
+.press-letter:nth-child(9) {
+  animation-delay: 0.52s;
+}
+.press-letter:nth-child(10) {
+  animation-delay: 0.56s;
+}
+.press-letter:nth-child(11) {
+  animation-delay: 0.6s;
+}
+.press-letter:nth-child(12) {
+  animation-delay: 0.64s;
+}
+.press-letter:nth-child(n + 13) {
+  animation-delay: 0.68s;
+}
+
+.press-intro-rule {
+  height: 6px;
+  margin-top: 1rem;
+  border-top: 4px double var(--color-ink);
+  transform: scaleX(0);
+  animation: rule-grow 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0.75s forwards;
+}
+
+.press-roller {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 22vh;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--color-ink) 10%, transparent) 40%,
+    color-mix(in srgb, var(--color-ink) 28%, transparent) 50%,
+    color-mix(in srgb, var(--color-ink) 10%, transparent) 60%,
+    transparent
+  );
+  transform: translateY(-25vh);
+  animation: roller 1s cubic-bezier(0.45, 0, 0.3, 1) 0.15s forwards;
+}
+
+/* ───────────────────────── Masthead ───────────────────────── */
+
+.nameplate {
+  filter: url(#letterpress);
+  text-shadow:
+    0 0 1px color-mix(in srgb, var(--color-ink) 45%, transparent),
+    0.6px 0.8px 0 color-mix(in srgb, var(--color-ink) 30%, transparent);
+  transition: text-shadow 0.35s ease;
+}
+
+.nameplate-link {
+  animation: ink-settle 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+html[data-intro="running"] .nameplate-link {
+  animation-delay: 1.55s;
+}
+
+.nameplate-link:hover .nameplate {
+  text-shadow:
+    3px 2px 0 color-mix(in srgb, var(--color-press-red) 60%, transparent),
+    -2px -1px 0 color-mix(in srgb, var(--color-ink-blue) 50%, transparent);
+}
+
+.ornament {
+  color: var(--color-press-red);
+}
+
+/* ───────────────────────── Ticker ───────────────────────── */
+
+.ticker-viewport {
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 94%, transparent);
+}
+
+.ticker-track {
+  animation: ticker 60s linear infinite;
+  will-change: transform;
+}
+
+.ticker:hover .ticker-track,
+.ticker:focus-within .ticker-track {
+  animation-play-state: paused;
+}
+
+.ticker-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+/* ───────────────────────── Paper ───────────────────────── */
+
+.paper-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 58%,
+    color-mix(in srgb, #6b5530 16%, transparent) 100%
+  );
+}
+
+[data-theme="dark"] .paper-vignette {
+  background:
+    radial-gradient(ellipse 55% 40% at 50% 0%, rgb(255 205 140 / 0.07), transparent 70%),
+    radial-gradient(ellipse at center, transparent 50%, rgb(0 0 0 / 0.5) 100%);
+}
+
+.fold::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 22px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--color-ink) 6%, transparent) 42%,
+    color-mix(in srgb, var(--color-ink) 22%, transparent) 50%,
+    rgb(255 255 255 / 0.4) 53%,
+    transparent
+  );
+}
+
+[data-theme="dark"] .fold::before {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(0 0 0 / 0.35) 48%,
+    color-mix(in srgb, var(--color-ink) 14%, transparent) 53%,
+    transparent
+  );
+}
+
+/* ───────────────────────── Images ───────────────────────── */
+
+.halftone {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.halftone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgb(20 18 15 / 0.55) 0.9px, transparent 1.4px);
+  background-size: 5px 5px;
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+  transition: opacity 0.6s ease;
+}
+
+.halftone img {
+  filter: grayscale(0.4) sepia(0.15) contrast(1.05);
+  transition: filter 0.6s ease;
+}
+
+[data-theme="dark"] .halftone img {
+  filter: grayscale(0.4) sepia(0.15) contrast(1.05) brightness(0.72);
+}
+
+.group:hover .halftone,
+.halftone:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 var(--color-press-red);
+}
+
+.group:hover .halftone::after,
+.halftone:hover::after {
+  opacity: 0;
+}
+
+.halftone:hover img,
+.group:hover .halftone img {
+  filter: none;
+}
+
+[data-theme="dark"] .halftone:hover img,
+[data-theme="dark"] .group:hover .halftone img {
+  filter: brightness(0.88);
+}
+
+/* ───────────────────────── Motion ───────────────────────── */
+
+.ink-settle {
+  animation: ink-settle 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.page-turn-shade {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-ink) 7%, transparent) 60%,
+    color-mix(in srgb, var(--color-ink) 12%, transparent) 85%,
+    transparent
+  );
+}
+
+.rule-draw::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-ink);
+  transform-origin: left;
+}
+
+@supports (animation-timeline: view()) {
+  .rule-draw::before {
+    animation: rule-grow linear both;
+    animation-timeline: view();
+    animation-range: entry 10% entry 70%;
+  }
+
+  .parallax-img {
+    animation: parallax linear both;
+    animation-timeline: view();
+  }
+
+  .article-body > * {
+    animation: ink-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: ink-flood 0.85s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+@keyframes ink-flood {
+  from {
+    clip-path: circle(0 at var(--flood-x, 50%) var(--flood-y, 0));
+  }
+  to {
+    clip-path: circle(var(--flood-r, 150vmax) at var(--flood-x, 50%) var(--flood-y, 0));
+  }
+}
+
+@keyframes press-stamp {
+  60% {
+    opacity: 1;
+    transform: translateY(0.04em) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes press-lift {
+  to {
+    transform: translateY(-104%) rotate(-1.2deg);
+    box-shadow: 0 30px 60px rgb(0 0 0 / 0.25);
+  }
+}
+
+@keyframes roller {
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+@keyframes rule-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ink-settle {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(1.03);
+  }
+  55% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+@keyframes ink-in {
+  from {
+    opacity: 0.1;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes parallax {
+  from {
+    transform: scale(1.12) translateY(-5%);
+  }
+  to {
+    transform: scale(1.12) translateY(5%);
+  }
+}
+
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pulse-dot {
+  50% {
+    opacity: 0.25;
+    transform: scale(0.7);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -108,7 +519,25 @@
     scroll-behavior: auto !important;
   }
 
+  .press-intro,
   .grain-overlay {
-    display: none;
+    display: none !important;
+  }
+
+  .ticker-track,
+  .parallax-img,
+  .rule-draw::before,
+  .article-body > *,
+  .nameplate-link,
+  .ink-settle {
+    animation: none !important;
+  }
+
+  .ticker-viewport {
+    overflow-x: auto;
+  }
+
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }

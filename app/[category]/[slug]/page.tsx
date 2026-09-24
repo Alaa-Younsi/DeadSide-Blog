@@ -6,6 +6,7 @@ import { ArticleToc } from "@/components/article-toc"
 import { Byline } from "@/components/byline"
 import { CategoryBadge } from "@/components/category-badge"
 import { MdxContent } from "@/components/mdx-content"
+import { ReadingProgress } from "@/components/reading-progress"
 import { getCategory } from "@/lib/categories"
 import { getAllPosts, getPost, getPostsByCategory } from "@/lib/content"
 import { site } from "@/lib/site"
@@ -68,6 +69,7 @@ export default async function ArticlePage({
 
   return (
     <article>
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -82,7 +84,7 @@ export default async function ArticlePage({
             className="mx-auto"
           />
         ) : null}
-        <h1 className="font-headline mt-3 text-4xl leading-[1.05] font-black sm:text-5xl">
+        <h1 className="ink-settle font-headline mt-3 text-4xl leading-[1.05] font-black sm:text-6xl">
           {post.title}
         </h1>
         <p className="font-body mt-4 text-lg text-ink-muted">{post.excerpt}</p>
@@ -92,8 +94,8 @@ export default async function ArticlePage({
       </header>
 
       {post.cover ? (
-        <div className="relative mx-auto mt-8 aspect-16/9 max-w-4xl overflow-hidden border border-ink">
-          <Image src={post.cover} alt="" fill className="object-cover" priority />
+        <div className="halftone relative mx-auto mt-8 aspect-16/9 max-w-4xl overflow-hidden border border-ink">
+          <Image src={post.cover} alt="" fill className="parallax-img object-cover" priority />
         </div>
       ) : null}
 
