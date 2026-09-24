@@ -6,6 +6,8 @@ import { categories, getCategory } from "@/lib/categories"
 import { getPostsByCategory } from "@/lib/content"
 import { site } from "@/lib/site"
 
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return categories.map((category) => ({ category: category.slug }))
 }

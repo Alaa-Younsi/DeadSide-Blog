@@ -26,6 +26,29 @@ export function getAllTags(): string[] {
   return [...tags].sort()
 }
 
+export function getPostsByTag(tag: string): Post[] {
+  return getAllPosts().filter((post) => post.tags.includes(tag))
+}
+
+export function getTagCounts(): { tag: string; count: number }[] {
+  return getAllTags()
+    .map((tag) => ({ tag, count: getPostsByTag(tag).length }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag))
+}
+
+export function getArchive(): { label: string; posts: Post[] }[] {
+  const groups = new Map<string, Post[]>()
+  for (const post of getAllPosts()) {
+    const label = new Date(post.date).toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    })
+    groups.set(label, [...(groups.get(label) ?? []), post])
+  }
+  return [...groups].map(([label, posts]) => ({ label, posts }))
+}
+
 /**
  * Front-page editorial selection: explicit `featured` posts (ordered by
  * `featuredOrder` when set) stand in for an editor's picks; recent posts

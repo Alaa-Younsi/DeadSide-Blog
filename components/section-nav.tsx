@@ -41,6 +41,17 @@ export function SectionNav() {
         })}
         <li>
           <Link
+            href="/archive"
+            className={cn(
+              "border-b-2 border-transparent pb-0.5 transition-colors hover:text-press-red",
+              pathname === "/archive" && "border-press-red text-press-red",
+            )}
+          >
+            Archive
+          </Link>
+        </li>
+        <li>
+          <Link
             href="/search"
             className={cn(
               "border-b-2 border-transparent pb-0.5 transition-colors hover:text-press-red",

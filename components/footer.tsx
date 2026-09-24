@@ -45,6 +45,22 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  href="/archive"
+                  className="font-meta text-sm transition-colors hover:text-press-red"
+                >
+                  Archive
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tags"
+                  className="font-meta text-sm transition-colors hover:text-press-red"
+                >
+                  Index of Subjects
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/feed.xml"
                   className="font-meta text-sm transition-colors hover:text-press-red"
                 >

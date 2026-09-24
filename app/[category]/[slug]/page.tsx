@@ -7,10 +7,13 @@ import { Byline } from "@/components/byline"
 import { CategoryBadge } from "@/components/category-badge"
 import { MdxContent } from "@/components/mdx-content"
 import { ReadingProgress } from "@/components/reading-progress"
+import { TagLink } from "@/components/tag-link"
 import { getCategory } from "@/lib/categories"
 import { getAllPosts, getPost, getPostsByCategory } from "@/lib/content"
 import { site } from "@/lib/site"
 import { cn } from "@/lib/utils"
+
+export const dynamicParams = false
 
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ category: post.category, slug: post.slug }))
@@ -105,7 +108,19 @@ export default async function ArticlePage({
           post.toc.length > 0 ? "lg:grid-cols-[1fr_240px]" : "max-w-3xl",
         )}
       >
-        <MdxContent code={post.body} />
+        <div>
+          <MdxContent code={post.body} />
+          {post.tags.length > 0 ? (
+            <div className="mt-10 flex flex-wrap items-center gap-2 border-t border-rule pt-5">
+              <span className="font-meta mr-1 text-[11px] font-bold tracking-[0.16em] uppercase">
+                Filed under
+              </span>
+              {post.tags.map((tag) => (
+                <TagLink key={tag} tag={tag} />
+              ))}
+            </div>
+          ) : null}
+        </div>
         {post.toc.length > 0 ? (
           <div className="order-first lg:order-last">
             <div className="lg:sticky lg:top-8">

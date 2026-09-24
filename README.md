@@ -59,7 +59,9 @@ Your first paragraph gets a drop cap automatically.
 </PullQuote>
 ```
 
-Frontmatter is validated by `velite.config.ts` at build time — an invalid `category` or missing required field fails the build instead of shipping a broken page.
+Frontmatter is validated by `velite.config.ts`. `bun run build` runs Velite in strict mode, so an invalid `category`, a missing required field, or a tag that isn't lowercase-kebab-case (`self-hosting`, not `Self Hosting`) fails the build instead of silently dropping the post. In `bun run dev` problems are logged but don't stop the server.
+
+Each tag automatically gets a page at `/tags/<tag>`, and every post is listed in `/archive`.
 
 ## Adding a desk (category)
 
@@ -68,7 +70,7 @@ Edit `lib/categories.ts` — navigation, the front page's per-desk sections, and
 ## Project structure
 
 ```
-app/                 App Router routes (front page, [category], [category]/[slug], about, search, feed.xml, sitemap, robots)
+app/                 App Router routes (front page, [category], [category]/[slug], archive, tags, about, search, feed.xml, sitemap, robots)
 components/          UI components (masthead, article cards, MDX renderer, etc.)
 content/posts/       Article content (.mdx)
 lib/                 Categories config, site config, content helpers, fonts, utils

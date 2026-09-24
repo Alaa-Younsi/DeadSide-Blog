@@ -17,7 +17,9 @@ const posts = defineCollection({
       updated: s.isodate().optional(),
       excerpt: s.string().max(320),
       cover: s.string().optional(),
-      tags: s.array(s.string()).default([]),
+      tags: s
+        .array(s.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, "tags must be lowercase-kebab-case"))
+        .default([]),
       author: s.string(),
       featured: s.boolean().default(false),
       featuredOrder: s.number().optional(),

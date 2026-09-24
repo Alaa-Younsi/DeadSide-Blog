@@ -351,6 +351,11 @@ html[data-intro="running"] .nameplate-link {
   filter: brightness(0.88);
 }
 
+.leader {
+  border-bottom: 2px dotted var(--color-rule);
+  transform: translateY(-0.3em);
+}
+
 /* ───────────────────────── Motion ───────────────────────── */
 
 .ink-settle {
