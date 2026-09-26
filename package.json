@@ -2,6 +2,8 @@
   "name": "deadside",
   "private": true,
   "version": "2.0.0",
+  "license": "MIT",
+  "author": "Alaa Younsi",
   "type": "module",
   "scripts": {
     "dev": "concurrently -k -n velite,next -c yellow,cyan \"velite dev\" \"next dev\"",
